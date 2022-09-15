@@ -4,12 +4,12 @@ import { Home } from "./Home";
 import { About } from "./About";
 import { Login } from "./Login";
 import { UserProvider } from "./context/userContext";
+import { Header } from "./Components/Header";
 
 function App() {
 	return (
-		<UserProvider>
-			<div>
-				{/* 
+		<div>
+			{/* 
             <Link to={"/tutorials"}>
               <Typography variant="body2">Tutorials</Typography>
             </Link>
@@ -18,17 +18,20 @@ function App() {
             </Link>
           </Toolbar>
         </AppBar>*/}
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/about" element={<About />} />
 
-					{/*
+			<Header />
+			<Routes>
+				<Route path="/" element={<Home />} />
+
+				<Route path="/login" element={<Login />} />
+
+				<Route path="/about" element={<About />} />
+
+				{/*
         <Route path="/" element={<Component />} />
   */}
-				</Routes>
-			</div>
-		</UserProvider>
+			</Routes>
+		</div>
 	);
 }
 

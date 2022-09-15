@@ -3,7 +3,6 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { Header } from "./Components/Header";
 
 const Item = styled(Paper)(({ theme }) => ({
 	backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -16,7 +15,6 @@ const Item = styled(Paper)(({ theme }) => ({
 export function Home() {
 	return (
 		<div>
-			<Header />
 			<div>SWOTANALYSIS.APP Making decisisons easier and better.</div>
 		</div>
 	);

@@ -9,6 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
+import { useNavigate } from "react-router-dom";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -31,6 +32,10 @@ export function Header() {
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null);
 	};
+	const navigate = useNavigate();
+	const handleLogin = useCallback(() => {
+		navigate("/login");
+	}, [navigate]);
 	return (
 		<div>
 			<AppBar position="static">
@@ -153,7 +158,7 @@ export function Header() {
 								</Menu>
 							</Box>
 						) : (
-							<MenuItem key={"Login"} onClick={handleCloseNavMenu}>
+							<MenuItem key={"Login"} onClick={handleLogin}>
 								<Typography textAlign="center">Login</Typography>
 							</MenuItem>
 						)}
