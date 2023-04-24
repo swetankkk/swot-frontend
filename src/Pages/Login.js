@@ -50,7 +50,6 @@ export function Login() {
 				boxSizing: 'border-box',
 
 				padding: 0,
-				paddingRight: '0%',
 				height: '100vh',
 			}}
 			maxWidth={false}
