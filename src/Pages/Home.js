@@ -26,7 +26,7 @@ export function Home() {
 		<Container
 			disableGutters={true}
 			sx={{
-				bgcolor: '#3F4448',
+				bgcolor: '#2F3438',
 				padding: 10,
 				flexGrow: 1,
 				width: '100%',
@@ -47,7 +47,7 @@ export function Home() {
 			>
 				{Array.from(data).map((_, index) => (
 					<Grid
-						xs={2}
+						xs={12}
 						sm={4}
 						md={4}
 						xl={3}

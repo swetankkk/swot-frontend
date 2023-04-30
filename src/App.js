@@ -6,6 +6,7 @@ import { Login } from './Pages/Login';
 import { UserProvider } from './context/userContext';
 import { Register } from './Pages/Register';
 import { Home } from './Pages/Home';
+import { Board } from './Pages/Board';
 
 function App() {
 	return (
@@ -28,9 +29,7 @@ function App() {
 				<Route path='/about' element={<About />} />
 				<Route path='/register' element={<Register />} />
 				<Route path='/home' element={<Home />} />
-				{/*
-        <Route path="/" element={<Component />} />
-  */}
+				<Route path='/board' element={<Board />} />
 			</Routes>
 		</div>
 	);
