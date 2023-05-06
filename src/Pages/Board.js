@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Container, TextareaAutosize, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import Editor from '../Components/Editor';
+import { AuthenticatedHeader } from '../Components/AuthenticatedHeader';
 
 export function Board() {
 	const [points, setPoints] = useState({
@@ -11,26 +12,22 @@ export function Board() {
 		threats: [''],
 	});
 	const inputRef = useRef();
-
-	let lastChangeType = useRef('');
+	const [displayError, setError] = useState({
+		strength: false,
+		weakness: false,
+		opportunities: false,
+		threats: false,
+	});
 	useEffect(() => {
-		console.log('Use effect , current', inputRef.current);
 		if (inputRef.current) {
-			console.log('running focus');
-			//inputRef.current.focus();
-			setTimeout(() => {
-				inputRef.current.focus();
-			}, 0);
-			/*let no = points[lastChangeType.current].length - 1;
-			let focusElementId = `${lastChangeType.current}${no}`;
-			console.log('FocusElement', focusElementId);
-			const lastElement = inputRefs.current[focusElementId];
-			console.log('lastElement : ', lastElement);
-			if (lastElement) {
-				lastElement.focus();
-			}*/
+			inputRef.current.focus();
 		}
-	}, [points]);
+	}, [
+		points.strength.length,
+		points.weakness.length,
+		points.opportunities.length,
+		points.threats.length,
+	]);
 	const handleChange = (index, event, type) => {
 		const newValues = { ...points };
 		newValues[type][index] = event.target.value;
@@ -42,11 +39,14 @@ export function Board() {
 			event.preventDefault();
 			const { [type]: arr } = points;
 
-			if (points[type].length < 4) {
+			if (points[type].length < 3) {
 				setPoints((points) => ({ ...points, [type]: [...arr, ''] }));
-				lastChangeType.current = type;
-				//inputRefs.current.focus();
-			} else console.log('3 Points allowed max	');
+			} else {
+				setError((displayError) => ({ ...displayError, [type]: true }));
+				setTimeout(() => {
+					setError((displayError) => ({ ...displayError, [type]: false }));
+				}, 3000);
+			}
 		}
 	};
 
@@ -61,11 +61,13 @@ export function Board() {
 			}}
 			maxWidth={false}
 		>
+			<AuthenticatedHeader />
+
 			<Grid
 				container
 				sx={{
 					marginLeft: ' 25%',
-					marginTop: '100px',
+					marginTop: '80px',
 					display: 'flex',
 				}}
 				spacing={0}
@@ -79,7 +81,7 @@ export function Board() {
 						height: '240px',
 						display: 'flex',
 
-						backgroundColor: '#999999',
+						backgroundColor: 'white',
 						flexDirection: 'column',
 					}}
 					sx={{ marginRight: '0px' }}
@@ -92,7 +94,9 @@ export function Board() {
 							justifyContent: 'center',
 							display: 'flex',
 							paddingTop: '4px',
+							fontFamily: 'Georgia',
 						}}
+						variant='h6'
 					>
 						Strength
 					</Typography>
@@ -105,6 +109,11 @@ export function Board() {
 							ref={points.strength.length - 1 === index ? inputRef : null}
 						/>
 					))}
+					{displayError.strength ? (
+						<Typography sx={{ paddingLeft: '30px', color: '#BA0F30' }}>
+							Maximum 3 points allowed
+						</Typography>
+					) : null}
 				</Grid>
 
 				<Grid
@@ -117,7 +126,7 @@ export function Board() {
 						display: 'flex',
 						marginLeft: '0px',
 						justifyContent: 'flex-start',
-						backgroundColor: '#999999',
+						backgroundColor: 'white',
 						flexDirection: 'column',
 					}}
 				>
@@ -129,8 +138,9 @@ export function Board() {
 							justifyContent: 'center',
 							display: 'flex',
 							paddingTop: '4px',
-							marginLeft: '8px',
+							fontFamily: 'Georgia',
 						}}
+						variant='h6'
 					>
 						Weakness
 					</Typography>
@@ -140,8 +150,14 @@ export function Board() {
 							onChange={(e) => handleChange(index, e, 'weakness')}
 							onKeyDown={(e) => handleKeyDown(e, 'weakness')}
 							id={'weakness' + index}
+							ref={points.weakness.length - 1 === index ? inputRef : null}
 						/>
 					))}
+					{displayError.weakness ? (
+						<Typography sx={{ paddingLeft: '30px', color: '#BA0F30' }}>
+							Maximum 3 points allowed
+						</Typography>
+					) : null}
 				</Grid>
 				<Grid
 					xs={6}
@@ -153,7 +169,7 @@ export function Board() {
 						display: 'flex',
 						justifyContent: 'flex-start',
 						alignContent: 'center',
-						backgroundColor: '#999999',
+						backgroundColor: 'white',
 						marginTop: '-42.494%',
 						flexDirection: 'column',
 					}}
@@ -166,7 +182,9 @@ export function Board() {
 							justifyContent: 'center',
 							display: 'flex',
 							marginRight: '8px',
+							fontFamily: 'Georgia',
 						}}
+						variant='h6'
 					>
 						Opportunities
 					</Typography>
@@ -176,8 +194,14 @@ export function Board() {
 							onChange={(e) => handleChange(index, e, 'opportunities')}
 							onKeyDown={(e) => handleKeyDown(e, 'opportunities')}
 							id={'opportunities' + index}
+							ref={points.opportunities.length - 1 === index ? inputRef : null}
 						/>
 					))}
+					{displayError.opportunities ? (
+						<Typography sx={{ paddingLeft: '30px', color: '#BA0F30' }}>
+							Maximum 3 points allowed
+						</Typography>
+					) : null}
 				</Grid>
 				<Grid
 					xs={6}
@@ -189,7 +213,7 @@ export function Board() {
 						display: 'flex',
 						justifyContent: 'flex-start',
 						alignContent: 'center',
-						backgroundColor: '#999999',
+						backgroundColor: 'white',
 						marginLeft: '0',
 						marginTop: '-42.494%',
 						flexDirection: 'column',
@@ -202,8 +226,9 @@ export function Board() {
 							color: 'white',
 							justifyContent: 'center',
 							display: 'flex',
-							marginLeft: '8px',
+							fontFamily: 'Georgia',
 						}}
+						variant='h6'
 					>
 						Threats
 					</Typography>
@@ -213,8 +238,14 @@ export function Board() {
 							onChange={(e) => handleChange(index, e, 'threats')}
 							onKeyDown={(e) => handleKeyDown(e, 'threats')}
 							id={'threats' + index}
+							ref={points.threats.length - 1 === index ? inputRef : null}
 						/>
 					))}
+					{displayError.threats ? (
+						<Typography sx={{ paddingLeft: '30px', color: '#BA0F30' }}>
+							Maximum 3 points allowed
+						</Typography>
+					) : null}
 				</Grid>
 			</Grid>
 		</Container>

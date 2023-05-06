@@ -60,7 +60,7 @@ export function Home() {
 							alignContent: 'center',
 						}}
 					>
-						<Item>Topic Name</Item>
+						<Item sx={{ backgroundColor: 'white' }}>Topic Name</Item>
 					</Grid>
 				))}
 			</Grid>

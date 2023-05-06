@@ -66,7 +66,7 @@ export default forwardRef(function Editor(
 	};
 
 	return (
-		<List sx={{ padding: 0 }} id={id?.toString()} ref={ref}>
+		<List sx={{ padding: 0 }} key={id?.toString()}>
 			<ListItem sx={{ display: 'flex' }}>
 				<ListItemIcon sx={{ paddingTop: '3px', minWidth: 'unset' }}>
 					<FiberManualRecordSharpIcon
@@ -89,7 +89,9 @@ export default forwardRef(function Editor(
 						'& .MuiInput-underline:after': {
 							borderBottom: 'unset',
 						},
+						width: '90%',
 					}}
+					inputRef={ref}
 				/>
 			</ListItem>
 		</List>
