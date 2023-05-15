@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { clearAll } from '../Utils/auth';
 
 export function AuthenticatedHeader() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -15,6 +16,9 @@ export function AuthenticatedHeader() {
 	};
 	const handleClose = () => {
 		setAnchorEl(null);
+	};
+	const handleLogout = () => {
+		clearAll();
 	};
 	return (
 		<AppBar
@@ -71,6 +75,7 @@ export function AuthenticatedHeader() {
 					>
 						<MenuItem onClick={handleClose}>Profile</MenuItem>
 						<MenuItem onClick={handleClose}>My account</MenuItem>
+						<MenuItem onClick={handleLogout}>Logout</MenuItem>
 					</Menu>
 				</Toolbar>
 			</Container>

@@ -10,17 +10,7 @@ import { Board } from './Pages/Board';
 
 function App() {
 	return (
-		<div>
-			{/* 
-            <Link to={"/tutorials"}>
-              <Typography variant="body2">Tutorials</Typography>
-            </Link>
-            <Link to={"/add"}>
-              <Typography variant="body2">Add</Typography>
-            </Link>
-          </Toolbar>
-        </AppBar>*/}
-
+		<UserProvider>
 			<Routes>
 				<Route path='/' element={<Landing />} />
 
@@ -31,7 +21,7 @@ function App() {
 				<Route path='/home' element={<Home />} />
 				<Route path='/board' element={<Board />} />
 			</Routes>
-		</div>
+		</UserProvider>
 	);
 }
 

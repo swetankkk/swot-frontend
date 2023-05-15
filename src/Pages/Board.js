@@ -3,6 +3,8 @@ import { Container, TextareaAutosize, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import Editor from '../Components/Editor';
 import { AuthenticatedHeader } from '../Components/AuthenticatedHeader';
+import { useNavigate } from 'react-router-dom';
+import { checkAuth } from '../Utils/auth';
 
 export function Board() {
 	const [points, setPoints] = useState({
@@ -28,6 +30,15 @@ export function Board() {
 		points.opportunities.length,
 		points.threats.length,
 	]);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const isAuthenticated = async () => {
+			const response = await checkAuth();
+			if (!response) navigate('/login');
+		};
+		isAuthenticated();
+	}, []);
 	const handleChange = (index, event, type) => {
 		const newValues = { ...points };
 		newValues[type][index] = event.target.value;
@@ -67,8 +78,9 @@ export function Board() {
 				container
 				sx={{
 					marginLeft: ' 25%',
-					marginTop: '80px',
+
 					display: 'flex',
+					marginTop: '15vh',
 				}}
 				spacing={0}
 			>

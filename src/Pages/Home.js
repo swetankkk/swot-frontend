@@ -1,10 +1,12 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, STack, Container, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import Paper from '@mui/material/Paper';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import { AuthenticatedHeader } from '../Components/AuthenticatedHeader';
+import { useNavigate } from 'react-router-dom';
+import { checkAuth } from '../Utils/auth';
 
 const Item = styled(Paper)(({ theme }) => ({
 	//backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -22,6 +24,14 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export function Home() {
 	const data = new Array(10);
+	const navigate = useNavigate();
+	useEffect(() => {
+		const isAuthenticated = async () => {
+			const response = await checkAuth();
+			if (!response) navigate('/login');
+		};
+		isAuthenticated();
+	}, []);
 	return (
 		<Container
 			disableGutters={true}

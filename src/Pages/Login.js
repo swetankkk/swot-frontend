@@ -65,7 +65,7 @@ export function Login() {
 			/>*/}
 			<Container
 				sx={{
-					height: '70vh',
+					height: '80vh',
 					display: 'flex',
 					marginTop: ' 10vh',
 				}}
@@ -78,7 +78,7 @@ export function Login() {
 						flexDirection: 'column',
 						height: '33vh',
 						width: '25vw',
-						marginLeft: '22vw',
+						marginLeft: '21vw',
 					}}
 				>
 					<Typography

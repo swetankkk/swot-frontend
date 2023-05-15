@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../Utils/auth';
+import { registerUser, saveToken } from '../Utils/auth';
 import {
 	Button,
 	Stack,
@@ -11,9 +11,12 @@ import {
 	Box,
 } from '@mui/material';
 import { LogoHeader } from '../Components/LogoHeader';
+import { UserContext } from '../context/userContext';
 
 export function Register() {
-	const [loggedin, setLoggedin] = React.useState(false); //To be shifted in Global State
+	const [error, setError] = React.useState(false); //To be shifted in Global State
+	const { user, setUser } = useContext(UserContext);
+
 	const navigate = useNavigate();
 	const handleLogin = useCallback(() => {
 		navigate('/login');
@@ -21,9 +24,20 @@ export function Register() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [name, setName] = useState('');
-	const handleRegister = (e) => {
+
+	const handleRegister = async (e) => {
 		e.preventDefault();
-		registerUser(name, email, password);
+		const response = await registerUser(name, email, password);
+		if (response.data.success) {
+			setError(null);
+			setUser(response.data.data.user);
+			//console.log('Tokens : ', response.data.data.tokens);
+			saveToken(response.data.data.tokens);
+			navigate('/home');
+		} else {
+			setError(response.data.message);
+		}
+		//console.log('Response : ', response);
 	};
 	const handleOnChange = (e) => {
 		if (e.target.name === 'email') {
@@ -51,7 +65,12 @@ export function Register() {
 			<LogoHeader />
 
 			<Container
-				sx={{ padding: 15, margin: 'auto', maxWidth: 'xl', height: '80%' }}
+				sx={{
+					margin: 'auto',
+					maxWidth: 'xl',
+					height: '80%',
+					marginTop: '10vh',
+				}}
 			>
 				<Paper
 					elevation={4}
@@ -60,11 +79,15 @@ export function Register() {
 						display: 'flex',
 						flexDirection: 'column',
 						width: '25vw',
-						marginLeft: '22vw',
+						marginLeft: '21vw',
 						padding: (4, 0, 4, 0),
 					}}
 				>
-					<Typography variant='h4' padding={(2, 0, 0, 2)}>
+					<Typography
+						variant='h4'
+						padding={(2, 0, 0, 2)}
+						sx={{ display: 'flex', justifyContent: 'center' }}
+					>
 						Register
 					</Typography>
 					<Stack padding={(0, 0, 0, 2)} spacing={2}>
@@ -77,7 +100,7 @@ export function Register() {
 							onChange={handleOnChange}
 						/>
 						<TextField
-							label='Username'
+							label='Email'
 							variant='outlined'
 							fullWidth
 							value={email}
@@ -94,7 +117,9 @@ export function Register() {
 							name='password'
 							onChange={handleOnChange}
 						/>
+						{error && <Typography>{error}</Typography>}
 					</Stack>
+
 					<Box>
 						<Stack
 							direction='row'
