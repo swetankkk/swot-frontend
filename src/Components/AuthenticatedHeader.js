@@ -8,9 +8,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { clearAll } from '../Utils/auth';
+import { useNavigate } from 'react-router-dom';
 
 export function AuthenticatedHeader() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
+	const navigate = useNavigate();
 	const handleMenu = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
@@ -19,6 +21,7 @@ export function AuthenticatedHeader() {
 	};
 	const handleLogout = () => {
 		clearAll();
+		navigate('/login');
 	};
 	return (
 		<AppBar

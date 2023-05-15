@@ -1,22 +1,17 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useContext } from 'react';
 import { Button, Stack, Container, Paper, TextField } from '@mui/material';
 import { Box } from '@mui/material';
 //import { makeStyles } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../Utils/auth';
+import { loginUser, saveToken } from '../Utils/auth';
 import { LogoHeader } from '../Components/LogoHeader';
 import Divider from '@mui/material/Divider';
-
-/*const useStyles = makeStyles((theme) => ({
-	customContainer: {
-		paddingLeft: '0', // override the default padding value
-		paddingRight: '0',
-	},
-}));*/
+import { UserContext } from '../context/userContext';
 
 export function Login() {
-	const [loggedin, setLoggedin] = React.useState(false); //To be shifted in Global State
+	const [error, setError] = React.useState(false); //To be shifted in Global State
+	const { user, setUser } = useContext(UserContext);
 	const navigate = useNavigate();
 
 	const handleRegister = useCallback(() => {
@@ -24,11 +19,18 @@ export function Login() {
 	}, [navigate]);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const handleLogin = (e) => {
+	const handleLogin = async (e) => {
 		e.preventDefault();
-		console.log('Running Login Function');
+		const response = await loginUser(email, password);
+		if (response.data.success) {
+			setError(null);
+			setUser(response.data.data.user);
 
-		loginUser(email, password);
+			saveToken(response.data.data.tokens);
+			navigate('/home');
+		} else {
+			setError(response.data.message);
+		}
 	};
 	const handleOnChange = (e) => {
 		if (e.target.name === 'email') {
@@ -37,7 +39,6 @@ export function Login() {
 			setPassword(e.target.value);
 		}
 	};
-	//const classes = useStyles();
 
 	return (
 		<Container

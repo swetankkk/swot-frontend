@@ -11,15 +11,9 @@ export const loginUser = async (email, password) => {
 				password: password,
 			},
 		});
-		console.log('Response from Login :', res);
-		if (res.data.status === 'success') {
-			alert('Logged in successfully!');
-			/*window.setTimeout(() => {
-				location.assign("/");
-			}, 1500);*/
-		}
+		return res;
 	} catch (err) {
-		alert(err.response.data.message);
+		return err.response;
 	}
 };
 
