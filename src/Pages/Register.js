@@ -66,10 +66,13 @@ export function Register() {
 
 			<Container
 				sx={{
-					margin: 'auto',
 					maxWidth: 'xl',
 					height: '80%',
-					marginTop: '10vh',
+					display: 'flex',
+					alignContent: 'center',
+					justifyContent: 'center',
+					maxHeight: '400px',
+					marginTop: '100px',
 				}}
 			>
 				<Paper
@@ -79,8 +82,6 @@ export function Register() {
 						display: 'flex',
 						flexDirection: 'column',
 						width: '25vw',
-						marginLeft: '21vw',
-						padding: (4, 0, 4, 0),
 					}}
 				>
 					<Typography

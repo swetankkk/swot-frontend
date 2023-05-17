@@ -66,9 +66,10 @@ export function Login() {
 			/>*/}
 			<Container
 				sx={{
-					height: '80vh',
+					height: '80%',
 					display: 'flex',
-					marginTop: ' 10vh',
+					justifyContent: 'center',
+					marginTop: '100px',
 				}}
 			>
 				<Paper
@@ -77,9 +78,9 @@ export function Login() {
 					sx={{
 						display: 'flex',
 						flexDirection: 'column',
-						height: '33vh',
-						width: '25vw',
-						marginLeft: '21vw',
+						minWidth: '400px',
+						maxWidth: '400px',
+						maxHeight: '350px',
 					}}
 				>
 					<Typography
