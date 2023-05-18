@@ -66,7 +66,6 @@ export function Login() {
 			/>*/}
 			<Container
 				sx={{
-					height: '80%',
 					display: 'flex',
 					justifyContent: 'center',
 					marginTop: '100px',
@@ -77,20 +76,23 @@ export function Login() {
 					variant='elevation'
 					sx={{
 						display: 'flex',
+						minHeight: '200px',
 						flexDirection: 'column',
-						minWidth: '400px',
-						maxWidth: '400px',
-						maxHeight: '350px',
+						minWidth: '300px',
+						maxWidth: '500px',
+						maxHeight: '365px',
+						padding: '10px',
+						width: '25vw',
 					}}
 				>
 					<Typography
 						variant='h4'
-						padding={(4, 0, 0, 3)}
+						padding={(0, 0, 0, 2)}
 						sx={{ display: 'flex', justifyContent: 'center' }}
 					>
 						Log in
 					</Typography>
-					<Stack spacing={2} sx={{ display: 'flex', padding: (0, 2, 0, 3) }}>
+					<Stack spacing={2} sx={{ display: 'flex', padding: (0, 1, 0, 1) }}>
 						<TextField
 							label='Email'
 							variant='outlined'
@@ -109,6 +111,7 @@ export function Login() {
 							name='password'
 							onChange={handleOnChange}
 						/>
+						{error && <Typography>{error}</Typography>}
 					</Stack>
 					<Box>
 						<Stack

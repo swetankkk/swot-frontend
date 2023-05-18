@@ -67,7 +67,7 @@ export function Register() {
 			<Container
 				sx={{
 					maxWidth: 'xl',
-					height: '80%',
+
 					display: 'flex',
 					alignContent: 'center',
 					justifyContent: 'center',
@@ -127,6 +127,9 @@ export function Register() {
 							spacing={4}
 							justifyContent='center'
 							paddingY={1}
+							sx={{
+								paddingBottom: '15px',
+							}}
 						>
 							<Button variant='contained' onClick={handleRegister}>
 								Register
