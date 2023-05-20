@@ -32,7 +32,10 @@ export function AuthenticatedHeader() {
 			<Container maxWidth='xl'>
 				<Toolbar
 					disableGutters
-					sx={{ display: 'flexbox', justifyContent: 'space-between' }}
+					sx={{
+						display: 'flex',
+						justifyContent: 'space-between',
+					}}
 				>
 					<Typography
 						variant='h6'

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, STack, Container, TextField } from '@mui/material';
+import { Button, STack, Container, TextField, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import Paper from '@mui/material/Paper';
@@ -7,6 +7,8 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import { AuthenticatedHeader } from '../Components/AuthenticatedHeader';
 import { useNavigate } from 'react-router-dom';
 import { checkAuth } from '../Utils/auth';
+import IconButton from '@mui/material/IconButton';
+import ControlPointSharpIcon from '@mui/icons-material/ControlPointSharp';
 
 const Item = styled(Paper)(({ theme }) => ({
 	//backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -55,6 +57,31 @@ export function Home() {
 				columns={{ xs: 4, sm: 8, md: 12 }}
 				sx={{ padding: '50px' }}
 			>
+				<Grid
+					xs={12}
+					sm={4}
+					md={4}
+					xl={3}
+					key={'plus'}
+					style={{
+						height: '200px',
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						alignContent: 'center',
+					}}
+				>
+					<Item
+						sx={{
+							backgroundColor: 'white',
+						}}
+					>
+						<IconButton sx={{ color: 'black' }}>
+							<ControlPointSharpIcon fontSize='large' />
+							<Typography>New</Typography>
+						</IconButton>
+					</Item>
+				</Grid>
 				{Array.from(data).map((_, index) => (
 					<Grid
 						xs={12}

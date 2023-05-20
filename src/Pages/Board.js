@@ -68,7 +68,7 @@ export function Board() {
 				width: '100%',
 				display: 'flex',
 				height: '100vh',
-				margin: 0,
+				justifyContent: 'center',
 			}}
 			maxWidth={false}
 		>
@@ -77,12 +77,10 @@ export function Board() {
 			<Grid
 				container
 				sx={{
-					marginLeft: ' 25%',
-
 					display: 'flex',
-					marginTop: '15vh',
+					marginTop: 'calc(10vh + 64px)',
+					marginBottom: '10vh',
 				}}
-				spacing={0}
 			>
 				<Grid
 					xs={6}
@@ -90,9 +88,8 @@ export function Board() {
 					md={6}
 					xl={6}
 					style={{
-						height: '240px',
+						height: '250px',
 						display: 'flex',
-
 						backgroundColor: 'white',
 						flexDirection: 'column',
 					}}
@@ -134,12 +131,11 @@ export function Board() {
 					md={6}
 					xl={6}
 					style={{
-						height: '240px',
 						display: 'flex',
-						marginLeft: '0px',
 						justifyContent: 'flex-start',
 						backgroundColor: 'white',
 						flexDirection: 'column',
+						height: '250px',
 					}}
 				>
 					<Typography
@@ -150,6 +146,7 @@ export function Board() {
 							justifyContent: 'center',
 							display: 'flex',
 							paddingTop: '4px',
+
 							fontFamily: 'Georgia',
 						}}
 						variant='h6'
@@ -177,12 +174,12 @@ export function Board() {
 					md={6}
 					xl={6}
 					style={{
-						height: '240px',
 						display: 'flex',
 						justifyContent: 'flex-start',
 						alignContent: 'center',
 						backgroundColor: 'white',
-						marginTop: '-42.494%',
+						height: '250px',
+
 						flexDirection: 'column',
 					}}
 				>
@@ -221,13 +218,12 @@ export function Board() {
 					md={6}
 					xl={6}
 					style={{
-						height: '240px',
 						display: 'flex',
 						justifyContent: 'flex-start',
 						alignContent: 'center',
 						backgroundColor: 'white',
 						marginLeft: '0',
-						marginTop: '-42.494%',
+						height: '250px',
 						flexDirection: 'column',
 					}}
 				>
