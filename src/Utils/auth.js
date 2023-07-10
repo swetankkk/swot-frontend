@@ -1,11 +1,10 @@
 import axios from 'axios';
-import Config from '../config.json';
 
 export const loginUser = async (email, password) => {
 	try {
 		const res = await axios({
 			method: 'POST',
-			url: Config.BACKEND_URL + `/v1/auth/login`,
+			url: `${process.env.REACT_APP_API_URL}/v1/auth/login`,
 			data: {
 				email: email,
 				password: password,
@@ -22,7 +21,7 @@ export const registerUser = async (name, email, password) => {
 	try {
 		const res = await axios({
 			method: 'POST',
-			url: Config.BACKEND_URL + `/v1/auth/register`,
+			url: `${process.env.REACT_APP_API_URL}/v1/auth/register`,
 			headers: { 'Content-Type': 'application/json' },
 
 			data: {

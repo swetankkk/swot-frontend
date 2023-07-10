@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { checkAuth } from '../Utils/auth';
 import IconButton from '@mui/material/IconButton';
 import ControlPointSharpIcon from '@mui/icons-material/ControlPointSharp';
+import { fetchSwots } from '../Utils/fetchdata';
 
 const Item = styled(Paper)(({ theme }) => ({
 	//backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -25,7 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export function Home() {
-	const data = new Array(10);
+	const [data, setData] = useState();
 	const navigate = useNavigate();
 	useEffect(() => {
 		const isAuthenticated = async () => {
@@ -33,6 +34,10 @@ export function Home() {
 			if (!response) navigate('/login');
 		};
 		isAuthenticated();
+		fetchSwots().then((response) => {
+			console.log('Response :', response.data.data.swots);
+			setData(Object.keys(response.data.data.swots));
+		});
 	}, []);
 	return (
 		<Container
@@ -82,7 +87,26 @@ export function Home() {
 						</IconButton>
 					</Item>
 				</Grid>
-				{Array.from(data).map((_, index) => (
+				{data && <>{console.log(data)}</>}
+				{data &&
+					data.map((_, index) => (
+						<Grid
+							xs={12}
+							sm={4}
+							md={4}
+							xl={3}
+							style={{
+								height: '200px',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+								alignContent: 'center',
+							}}
+						>
+							<Item sx={{ backgroundColor: 'white' }}>{_}</Item>
+						</Grid>
+					))}
+				{/*Array.from(data).map((_, index) => (
 					<Grid
 						xs={12}
 						sm={4}
@@ -99,7 +123,7 @@ export function Home() {
 					>
 						<Item sx={{ backgroundColor: 'white' }}>Topic Name</Item>
 					</Grid>
-				))}
+				))*/}
 			</Grid>
 		</Container>
 	);
