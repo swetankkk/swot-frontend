@@ -1,18 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Container, TextareaAutosize, Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import Editor from '../Components/Editor';
-import { AuthenticatedHeader } from '../Components/AuthenticatedHeader';
+import Editor from './Editor';
+import { AuthenticatedHeader } from './AuthenticatedHeader';
 import { useNavigate } from 'react-router-dom';
 import { checkAuth } from '../Utils/auth';
+import { updateSwot } from '../Utils/manipulatedata';
 
-export function Board() {
-	const [points, setPoints] = useState({
-		strength: [''],
-		weakness: [''],
-		opportunities: [''],
-		threats: [''],
-	});
+export function Board({ data, boardId }) {
+	const [points, setPoints] = useState(data.data.swot);
 	const inputRef = useRef();
 	const [displayError, setError] = useState({
 		strength: false,
@@ -39,6 +35,10 @@ export function Board() {
 		};
 		isAuthenticated();
 	}, []);
+	useEffect(() => {
+		//add api save call
+		updateSwot(boardId, points);
+	}, [boardId, points]);
 	const handleChange = (index, event, type) => {
 		const newValues = { ...points };
 		newValues[type][index] = event.target.value;
@@ -116,6 +116,7 @@ export function Board() {
 							onKeyDown={(e) => handleKeyDown(e, 'strength')}
 							id={'strength' + index}
 							ref={points.strength.length - 1 === index ? inputRef : null}
+							key={index}
 						/>
 					))}
 					{displayError.strength ? (
@@ -160,6 +161,7 @@ export function Board() {
 							onKeyDown={(e) => handleKeyDown(e, 'weakness')}
 							id={'weakness' + index}
 							ref={points.weakness.length - 1 === index ? inputRef : null}
+							key={index}
 						/>
 					))}
 					{displayError.weakness ? (
@@ -204,6 +206,7 @@ export function Board() {
 							onKeyDown={(e) => handleKeyDown(e, 'opportunities')}
 							id={'opportunities' + index}
 							ref={points.opportunities.length - 1 === index ? inputRef : null}
+							key={index}
 						/>
 					))}
 					{displayError.opportunities ? (
@@ -247,6 +250,7 @@ export function Board() {
 							onKeyDown={(e) => handleKeyDown(e, 'threats')}
 							id={'threats' + index}
 							ref={points.threats.length - 1 === index ? inputRef : null}
+							key={index}
 						/>
 					))}
 					{displayError.threats ? (

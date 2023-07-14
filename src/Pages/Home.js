@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { checkAuth } from '../Utils/auth';
 import IconButton from '@mui/material/IconButton';
 import ControlPointSharpIcon from '@mui/icons-material/ControlPointSharp';
-import { fetchSwots } from '../Utils/fetchdata';
+import { fetchSwots } from '../Utils/manipulatedata';
 
 const Item = styled(Paper)(({ theme }) => ({
 	//backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -35,10 +35,13 @@ export function Home() {
 		};
 		isAuthenticated();
 		fetchSwots().then((response) => {
-			console.log('Response :', response.data.data.swots);
 			setData(Object.keys(response.data.data.swots));
 		});
-	}, []);
+	}, [navigate]);
+	const handleClick = (event, _) => {
+		console.log('Value :', _);
+		navigate(`/${_}`);
+	};
 	return (
 		<Container
 			disableGutters={true}
@@ -87,7 +90,6 @@ export function Home() {
 						</IconButton>
 					</Item>
 				</Grid>
-				{data && <>{console.log(data)}</>}
 				{data &&
 					data.map((_, index) => (
 						<Grid
@@ -95,6 +97,7 @@ export function Home() {
 							sm={4}
 							md={4}
 							xl={3}
+							key={index}
 							style={{
 								height: '200px',
 								display: 'flex',
@@ -103,27 +106,17 @@ export function Home() {
 								alignContent: 'center',
 							}}
 						>
-							<Item sx={{ backgroundColor: 'white' }}>{_}</Item>
+							<Item sx={{ backgroundColor: 'white' }}>
+								{' '}
+								<IconButton
+									onClick={(e) => handleClick(e, _)}
+									sx={{ color: 'black' }}
+								>
+									<Typography>{_}</Typography>
+								</IconButton>
+							</Item>
 						</Grid>
 					))}
-				{/*Array.from(data).map((_, index) => (
-					<Grid
-						xs={12}
-						sm={4}
-						md={4}
-						xl={3}
-						key={index}
-						style={{
-							height: '200px',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-							alignContent: 'center',
-						}}
-					>
-						<Item sx={{ backgroundColor: 'white' }}>Topic Name</Item>
-					</Grid>
-				))*/}
 			</Grid>
 		</Container>
 	);

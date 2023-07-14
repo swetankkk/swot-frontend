@@ -6,7 +6,7 @@ import { Login } from './Pages/Login';
 import { UserProvider } from './context/userContext';
 import { Register } from './Pages/Register';
 import { Home } from './Pages/Home';
-import { Board } from './Pages/Board';
+import { File } from './Pages/File';
 import { NotFound } from './Pages/NotFound';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
 				<Route path='/about' element={<About />} />
 				<Route path='/register' element={<Register />} />
 				<Route path='/home' element={<Home />} />
-				<Route path='/board' element={<Board />} />
+				<Route path='/:boardId' element={<File />} />
 				<Route path='/error' element={<NotFound />} />
 				<Route path='*' element={<Navigate to='/error' replace />} />
 			</Routes>

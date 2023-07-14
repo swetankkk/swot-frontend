@@ -31,13 +31,11 @@ export function Register() {
 		if (response.data.success) {
 			setError(null);
 			setUser(response.data.data.user);
-			//console.log('Tokens : ', response.data.data.tokens);
 			saveToken(response.data.data.tokens);
 			navigate('/home');
 		} else {
 			setError(response.data.message);
 		}
-		//console.log('Response : ', response);
 	};
 	const handleOnChange = (e) => {
 		if (e.target.name === 'email') {
