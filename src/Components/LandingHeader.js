@@ -72,7 +72,11 @@ export function LandingHeader() {
 				},
 			}}
 		>
-			<AppBar>
+			<AppBar
+				sx={{
+					backgroundColor: '#2F3438',
+				}}
+			>
 				<Container maxWidth='xl' position='static'>
 					<Toolbar disableGutters>
 						<Typography
