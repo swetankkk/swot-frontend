@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, STack, Container, TextField, Typography } from '@mui/material';
-import Box from '@mui/material/Box';
+import { Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import Paper from '@mui/material/Paper';
 import { experimentalStyled as styled } from '@mui/material/styles';
@@ -49,11 +48,10 @@ export function Home() {
 				bgcolor: '#2F3438',
 				padding: 10,
 				flexGrow: 1,
-				width: '100%',
+
 				display: 'flex',
 				flexDirection: 'column',
 				margin: 0,
-
 				height: '100vh',
 			}}
 			maxWidth={false}
