@@ -33,7 +33,7 @@ export const fetchSwot = async (id) => {
 };
 export const updateSwot = async (id, points) => {
 	const accessToken = await readAccessToken();
-	console.log('Points :', points);
+	//console.log('Points :', points);
 	try {
 		const res = await axios({
 			method: 'PATCH',

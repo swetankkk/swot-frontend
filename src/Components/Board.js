@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import Editor from './Editor';
-import { AuthenticatedHeader } from './AuthenticatedHeader';
+import { FileHeader } from './FileHeader';
 import { useNavigate } from 'react-router-dom';
 import { checkAuth } from '../Utils/auth';
 import { updateSwot } from '../Utils/manipulatedata';
@@ -72,7 +72,7 @@ export function Board({ data, boardId }) {
 			}}
 			maxWidth={false}
 		>
-			<AuthenticatedHeader />
+			<FileHeader boardId={boardId} />
 
 			<Grid
 				container
