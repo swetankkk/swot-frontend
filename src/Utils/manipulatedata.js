@@ -33,7 +33,7 @@ export const fetchSwot = async (id) => {
 };
 export const updateSwot = async (id, points) => {
 	const accessToken = await readAccessToken();
-	console.log('Points :', points);
+	//console.log('Points :', points);
 	try {
 		const res = await axios({
 			method: 'PATCH',
@@ -42,6 +42,24 @@ export const updateSwot = async (id, points) => {
 				Authorization: `Bearer ${accessToken.token}`,
 			},
 			data: points,
+		});
+		return res;
+	} catch (err) {
+		return err.response;
+	}
+};
+
+export const renameSwot = async (name, boardId) => {
+	try {
+		const token = await readAccessToken();
+
+		const res = await axios({
+			method: 'PATCH',
+			url: `${process.env.REACT_APP_API_URL}/v1/auth/renameswot/${boardId}`,
+			headers: { Authorization: `Bearer ${token.token}` },
+			data: {
+				name: name,
+			},
 		});
 		return res;
 	} catch (err) {

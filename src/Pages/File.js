@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Board } from '../Components/Board';
 import { fetchSwot } from '../Utils/manipulatedata';
@@ -7,8 +7,9 @@ export function File() {
 	const { boardId } = useParams();
 	const [shouldLoad, setShouldLoad] = useState(null);
 	const navigate = useNavigate();
+	const memoizedFetchSwot = useMemo(() => fetchSwot(boardId), []);
 	useEffect(() => {
-		const data = fetchSwot(boardId);
+		const data = memoizedFetchSwot;
 		data.then((data) => {
 			setShouldLoad(data);
 		});
