@@ -97,3 +97,21 @@ export const checkAuth = async () => {
 	//check refresh token if its valid ask new login token , if not send to register to reauthenticate
 	//
 };
+
+export const renameSwot = async (name, boardId) => {
+	try {
+		const token = await readAccessToken();
+
+		const res = await axios({
+			method: 'PATCH',
+			url: `${process.env.REACT_APP_API_URL}/v1/auth/renameswot/${boardId}`,
+			headers: { Authorization: `Bearer ${token.token}` },
+			data: {
+				name: name,
+			},
+		});
+		return res;
+	} catch (err) {
+		return err.response;
+	}
+};
