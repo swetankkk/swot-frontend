@@ -55,7 +55,7 @@ export function Home() {
 				display: 'flex',
 				flexDirection: 'column',
 				margin: 0,
-				height: '100vh',
+				minHeight: '100vh',
 			}}
 			maxWidth={false}
 		>
