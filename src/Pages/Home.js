@@ -41,6 +41,9 @@ export function Home() {
 		console.log('Value :', _);
 		navigate(`/${_}`);
 	};
+	const handleNew = () => {
+		navigate('/new');
+	};
 	return (
 		<Container
 			disableGutters={true}
@@ -82,7 +85,7 @@ export function Home() {
 							backgroundColor: 'white',
 						}}
 					>
-						<IconButton sx={{ color: 'black' }}>
+						<IconButton sx={{ color: 'black' }} onClick={handleNew}>
 							<ControlPointSharpIcon fontSize='large' />
 							<Typography>New</Typography>
 						</IconButton>

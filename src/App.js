@@ -8,6 +8,7 @@ import { Register } from './Pages/Register';
 import { Home } from './Pages/Home';
 import { File } from './Pages/File';
 import { NotFound } from './Pages/NotFound';
+import { NewFile } from './Pages/NewFile';
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 				<Route path='/register' element={<Register />} />
 				<Route path='/home' element={<Home />} />
 				<Route path='/:boardId' element={<File />} />
+				<Route path='/new' element={<NewFile />} />
 				<Route path='/error' element={<NotFound />} />
 				<Route path='*' element={<Navigate to='/error' replace />} />
 			</Routes>
