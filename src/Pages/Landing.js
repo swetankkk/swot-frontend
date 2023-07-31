@@ -29,7 +29,7 @@ export function Landing() {
 				}}
 			>
 				<Typography>
-					SWOTIFY.APP Making decisisons easier and better.
+					Make decisisons easier and better by using SWOT analysis tool
 				</Typography>
 			</Box>
 		</Container>

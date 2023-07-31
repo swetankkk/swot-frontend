@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import Paper from '@mui/material/Paper';
@@ -32,13 +32,13 @@ export function Home() {
 			const response = await checkAuth();
 			if (!response) navigate('/login');
 		};
-		isAuthenticated();
-		fetchSwots().then((response) => {
-			setData(Object.keys(response.data.data.swots));
+		isAuthenticated().then(() => {
+			fetchSwots().then((response) => {
+				setData(Object.keys(response.data.data.swots));
+			});
 		});
 	}, [navigate]);
 	const handleClick = (event, _) => {
-		console.log('Value :', _);
 		navigate(`/${_}`);
 	};
 	const handleNew = () => {

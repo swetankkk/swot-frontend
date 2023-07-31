@@ -84,18 +84,30 @@ export const checkRefreshToken = async () => {
 };
 export const checkAuth = async () => {
 	const accessTokenValid = await checkAccessToken();
+	const refreshToken = await readRefreshToken();
 
 	if (accessTokenValid) return true;
 	else {
 		const refreshTokenValid = await checkRefreshToken();
 
-		if (refreshTokenValid)
-			//call new access token from api /refresh-tokens
-			return true;
+		if (refreshTokenValid) {
+			try {
+				const res = await axios({
+					method: 'POST',
+					url: `${process.env.REACT_APP_API_URL}/v1/auth/refresh-tokens`,
+					headers: { 'Content-Type': 'application/json' },
+					data: {
+						refreshToken: refreshToken.token,
+					},
+				});
+				saveToken(res.data);
+				return true;
+			} catch (err) {
+				return err.response;
+			}
+		}
 		return false;
 	}
-	//check refresh token if its valid ask new login token , if not send to register to reauthenticate
-	//
 };
 
 export const renameSwot = async (name, boardId) => {
