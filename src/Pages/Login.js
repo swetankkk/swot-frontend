@@ -1,4 +1,10 @@
-import React, { useCallback, useState, useContext } from 'react';
+import React, {
+	useCallback,
+	useState,
+	useContext,
+	useEffect,
+	useRef,
+} from 'react';
 import {
 	Button,
 	Stack,
@@ -16,6 +22,7 @@ import Divider from '@mui/material/Divider';
 import { UserContext } from '../context/userContext';
 
 export function Login() {
+	const isFirstRender = useRef(true);
 	const [error, setError] = React.useState(false); //To be shifted in Global State
 	const { user, setUser } = useContext(UserContext);
 	const navigate = useNavigate();
@@ -33,7 +40,6 @@ export function Login() {
 			setUser(response.data.data.user);
 
 			saveToken(response.data.data.tokens);
-			navigate('/home');
 		} else {
 			setError(response.data.message);
 		}
@@ -45,7 +51,19 @@ export function Login() {
 			setPassword(e.target.value);
 		}
 	};
+	useEffect(() => {
+		if (isFirstRender.current) {
+			isFirstRender.current = false;
+		} else {
+			// Perform the operation you want after setState
 
+			if (user) {
+				if (user?.isEmailVerified) {
+					navigate('/home');
+				} else navigate('/verify-email');
+			}
+		}
+	}, [navigate, user]);
 	return (
 		<Container
 			sx={{
