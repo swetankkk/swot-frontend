@@ -34,7 +34,9 @@ export function Home() {
 		};
 		isAuthenticated().then(() => {
 			fetchSwots().then((response) => {
-				setData(Object.keys(response.data.data.swots));
+				if (response.data.data?.swots) {
+					setData(Object.keys(response.data.data.swots));
+				}
 			});
 		});
 	}, [navigate]);
