@@ -184,7 +184,7 @@ export function LandingHeader() {
 						</Box>
 					) : (
 						<MenuItem key={'Login'} onClick={handleLogin}>
-							<Typography textAlign='center'>Login</Typography>
+							<Typography textAlign='center'>Login/Register</Typography>
 						</MenuItem>
 					)}
 				</Toolbar>

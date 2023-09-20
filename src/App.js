@@ -24,7 +24,7 @@ function App() {
 				<Route path='/home' element={<Home />} />
 				<Route path='/:boardId' element={<File />} />
 				<Route path='/new' element={<NewFile />} />
-				<Route path='/verify-email' element={<VerifyEmail />} />
+				<Route path='/verify-email/' element={<VerifyEmail />} />
 				<Route path='/error' element={<NotFound />} />
 				<Route path='*' element={<Navigate to='/error' replace />} />
 			</Routes>

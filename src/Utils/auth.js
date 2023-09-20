@@ -127,3 +127,18 @@ export const renameSwot = async (name, boardId) => {
 		return err.response;
 	}
 };
+
+export const resendEmail = async (email) => {
+	const accessToken = await readAccessToken();
+	try {
+		const res = await axios({
+			method: 'POST',
+			url: `${process.env.REACT_APP_API_URL}/v1/auth/send-verification-email`,
+			headers: { Authorization: `Bearer ${accessToken.token}` },
+		});
+		console.log('res :', res);
+		return res;
+	} catch (err) {
+		return err.response;
+	}
+};
