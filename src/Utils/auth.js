@@ -128,7 +128,7 @@ export const renameSwot = async (name, boardId) => {
 	}
 };
 
-export const resendEmail = async (email) => {
+export const sendEmail = async (email) => {
 	const accessToken = await readAccessToken();
 	try {
 		const res = await axios({
@@ -136,7 +136,22 @@ export const resendEmail = async (email) => {
 			url: `${process.env.REACT_APP_API_URL}/v1/auth/send-verification-email`,
 			headers: { Authorization: `Bearer ${accessToken.token}` },
 		});
-		console.log('res :', res);
+		return res;
+	} catch (err) {
+		return err.response;
+	}
+};
+
+export const verifyEmail = async (token) => {
+	try {
+		const res = await axios({
+			method: 'POST',
+			url: `${process.env.REACT_APP_API_URL}/v1/auth/verify-email`,
+			headers: { 'Content-Type': 'application/json' },
+			params: {
+				token: token,
+			},
+		});
 		return res;
 	} catch (err) {
 		return err.response;

@@ -60,7 +60,7 @@ export function Login() {
 			if (user) {
 				if (user?.isEmailVerified) {
 					navigate('/home');
-				} else navigate('/verify-email');
+				} else navigate('/email-unverified');
 			}
 		}
 	}, [navigate, user]);

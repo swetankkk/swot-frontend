@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { verifyEmail } from '../Utils/auth';
+import React from 'react';
 import { Container, Typography, Button } from '@mui/material';
-import { AuthenticatedHeader } from '../Components/AuthenticatedHeader';
 import Grid from '@mui/material/Unstable_Grid2';
+import { AuthenticatedHeader } from '../Components/AuthenticatedHeader';
 import Paper from '@mui/material/Paper';
 import { experimentalStyled as styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import ControlPointSharpIcon from '@mui/icons-material/ControlPointSharp';
+import { sendEmail } from '../Utils/auth';
 
 const Item = styled(Paper)(({ theme }) => ({
 	//backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -22,23 +23,18 @@ const Item = styled(Paper)(({ theme }) => ({
 	padding: '10px',
 }));
 
-export function VerifyEmail() {
-	const navigate = useNavigate();
-	const location = useLocation();
-	const queryParams = new URLSearchParams(location.search);
-	const bValue = queryParams.get('token');
-	const [success, setSuccess] = useState();
-	useEffect(() => {
-		const res = verifyEmail(bValue);
-
+export function EmailUnverified() {
+	const [success, setSuccess] = React.useState(false);
+	const [error, setError] = React.useState(false);
+	const handleResend = () => {
+		const res = sendEmail();
 		res.then((res) => {
-			//console.log('Res :', res);
-			if (res?.data?.success) setSuccess(true);
+			if (res?.data?.success) {
+				setSuccess(true);
+			} else setError(true);
 		});
-	});
-	const handleLogin = () => {
-		navigate('/login');
 	};
+
 	return (
 		<Container
 			disableGutters={true}
@@ -76,13 +72,24 @@ export function VerifyEmail() {
 							backgroundColor: 'white',
 						}}
 					>
-						{success && <Typography variant='h4'>Email verified</Typography>}
+						<Typography variant='h4'>Please verify your email</Typography>
 						<Typography variant='h6'>
-							Please login again to proceed furth
+							We have sent you an email to verify your email address. Please
+							verify to continue You can also click the resend email Button
+							below to resend the mail
 						</Typography>
-
-						<Button variant='contained' onClick={handleLogin}>
-							Login
+						{success && (
+							<Typography variant='h6' color='green'>
+								Email send Successfully
+							</Typography>
+						)}
+						{error && (
+							<Typography variant='h6' color='red'>
+								Error sending Email
+							</Typography>
+						)}
+						<Button variant='contained' onClick={handleResend}>
+							Resend Email
 						</Button>
 					</Item>
 				</Grid>

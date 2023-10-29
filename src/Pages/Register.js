@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { LogoHeader } from '../Components/LogoHeader';
 import { UserContext } from '../context/userContext';
+import { sendEmail } from '../Utils/auth';
 
 export function Register() {
 	const [error, setError] = React.useState(false); //To be shifted in Global State
@@ -32,7 +33,8 @@ export function Register() {
 			setError(null);
 			setUser(response.data.data.user);
 			saveToken(response.data.data.tokens);
-			navigate('/home');
+			const res = sendEmail();
+			navigate('/email-unverified');
 		} else {
 			setError(response.data.message);
 		}
